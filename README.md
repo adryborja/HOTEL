@@ -1,14 +1,14 @@
 # Proyecto Hotel
 
-Autoras: Adriana Borja, Genesis Tito, Camila Quirola
-NRC: 1406
+**Autoras:** Adriana Borja, Genesis Tito, Camila Quirola
+**NRC:** 1406
 
 Este proyecto es una aplicación web para la gestión de un hotel. Permite a los usuarios realizar reservas, gestionar habitaciones y administrar clientes.
 
 ## Características
 
-- **Reservas**: Los usuarios pueden realizar reservas de habitaciones.
-- **Gestión de Habitaciones**: Administración de la disponibilidad y características de las habitaciones.
+- **Reservas**: Los usuarios pueden realizar reservas de habitaciones, seleccionando habitaciones disponibles y clientes registrados.
+- **Habitaciones**: Administración del tipo y precio de las habitaciones.
 - **Clientes**: Gestión de la información de los clientes.
 
 ## Funcionalidades
@@ -21,6 +21,8 @@ Este proyecto es una aplicación web para la gestión de un hotel. Permite a los
 - **Validación:** Verifica que los campos estén completos y que el correo tenga un formato válido.
 
 **Habitaciones**
+- **Tipo de habitación:** Se puede escoger el tipo de habitación como: simple, doble, suit
+- **Precio:** Permite establecer un costo por noche de la habitación.
 - **Agregar habitaciones:** Permite añadir nuevas habitaciones especificando sus características.
 - **Actualizar habitaciones:** Modifica la información de una habitación existente.
 - **Eliminar habitaciones:** Elimina una habitación del sistema.
@@ -37,16 +39,19 @@ con el error.
 ## Instalación
 
 1. Clona el repositorio:
+
   Primero git init
+
   git clone https://github.com/adryborja/HOTEL.git 
 
 2. Navega al directorio del proyecto:
 
-  cd hotel
+   cd hotel
 
 3. Instala las dependencias con los comandos:
 
    npm install react-router-dom
+   
    npm run dev
 
 4. Si la instalacion fue correcta aparecera se levantara el puerto correspondiente:
