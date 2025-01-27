@@ -50,12 +50,14 @@ const HabitacionesForm: React.FC<HabitacionFormProps> = ({
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Tipo de habitación"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-            />
+           
+            <select name="" id="" value={tipo} onChange={(e) => setTipo(e.target.value)}>
+                 <option value={0}>-- Tipo de habitación --</option>
+                <option value="Individual">Individual</option>
+                <option value="Doble">Doble</option>
+                <option value="Triple">Triple</option>
+                <option value="Suite">Suite</option>
+            </select>
             <input
                 type="text"
                 placeholder="Precio"

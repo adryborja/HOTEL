@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 interface Cliente {
     id: number;
     nombre: string;
+    apellido: string;
 }
 
 interface Habitacion {
@@ -114,7 +115,7 @@ const ReservasForm: React.FC<ReservasFormProps> = ({
                 <option value="">-- Seleccione un cliente --</option>
                 {clientes.map((cliente) => (
                     <option key={cliente.id} value={cliente.id}>
-                        {cliente.nombre}
+                        {`${cliente.nombre} ${cliente.apellido}`}
                     </option>
                 ))}
             </select>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 interface ClienteFormProps {
-    agregarCliente: (nombre: string, correo: string) => void;
-    actualizarCliente: (id: number, nombre: string, correo: string) => void;
-    editCliente: { id: number; nombre: string; correo: string } | null;
+    agregarCliente: (nombre: string, apellido: string, correo: string) => void;
+    actualizarCliente: (id: number, nombre: string, apellido: string, correo: string) => void;
+    editCliente: { id: number; nombre: string; apellido: string; correo: string } | null;
     cancelarEdicion: () => void;
 }
 
@@ -14,20 +14,23 @@ const ClientesForm: React.FC<ClienteFormProps> = ({
     cancelarEdicion,
 }) => {
     const [nombre, setNombre] = useState<string>("");
+    const [apellido, setApellido] = useState<string>("");
     const [correo, setCorreo] = useState<string>("");
 
     useEffect(() => {
         if (editCliente) {
             setNombre(editCliente.nombre);
+            setApellido(editCliente.apellido);
             setCorreo(editCliente.correo);
         } else {
             setNombre("");
+            setApellido("");
             setCorreo("");
         }
     }, [editCliente]);
 
     const manejarSubmit = () => {
-        if (!nombre.trim() || !correo.trim()) {
+        if (!nombre.trim() ||!apellido.trim() || !correo.trim()) {
             alert("Por favor complete todos los campos");
             return;
         }
@@ -39,12 +42,13 @@ const ClientesForm: React.FC<ClienteFormProps> = ({
         }
 
         if (editCliente) {
-            actualizarCliente(editCliente.id, nombre, correo);
+            actualizarCliente(editCliente.id, nombre, apellido, correo);
         } else {
-            agregarCliente(nombre, correo);
+            agregarCliente(nombre, apellido, correo);
         }
 
         setNombre("");
+        setApellido("");
         setCorreo("");
     };
 
@@ -56,6 +60,10 @@ const ClientesForm: React.FC<ClienteFormProps> = ({
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
             />
+            <input type="text" 
+                placeholder="Apellido"
+                value={apellido}
+                onChange={(e)=> setApellido(e.target.value)}/>
             <input
                 type="email"
                 placeholder="Correo"

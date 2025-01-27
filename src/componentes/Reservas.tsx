@@ -4,6 +4,7 @@ import ReservasForm from "./ReservasForm";
 interface Cliente {
     id: number;
     nombre: string;
+    apellido: string;
 }
 
 interface Habitacion {
@@ -94,7 +95,12 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                     {reservas.map((reserva) => (
                         <tr key={reserva.id}>
                             <td>{reserva.id}</td>
-                            <td>{clientes.find((c) => c.id === reserva.clienteId)?.nombre}</td>
+                            <td>
+                            {`${clientes.find((c) => c.id === reserva.clienteId)?.nombre || ""} ${
+                            clientes.find((c) => c.id === reserva.clienteId)?.apellido || ""
+                            }`.trim()}
+                            
+                            </td>
                             <td>
                                 {reserva.habitaciones
                                     .map((id) => habitaciones.find((h) => h.id === id)?.tipo || "")

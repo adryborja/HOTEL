@@ -4,6 +4,7 @@ import ClientesForm from "./ClientesForm";
 interface Cliente {
     id: number;
     nombre: string;
+    apellido: string;
     correo: string;
 }
 
@@ -15,17 +16,17 @@ interface ClientesProps {
 const Clientes: React.FC<ClientesProps> = ({ clientes, setClientes }) => {
     const [editCliente, setEditCliente] = useState<Cliente | null>(null);
 
-    const agregarCliente = (nombre: string, correo: string) => {
+    const agregarCliente = (nombre: string, apellido: string, correo: string) => {
         setClientes((prevClientes) => [
             ...prevClientes,
-            { id: prevClientes.length + 1, nombre, correo },
+            { id: prevClientes.length + 1, nombre, apellido, correo },
         ]);
     };
 
-    const actualizarCliente = (id: number, nombre: string, correo: string) => {
+    const actualizarCliente = (id: number, nombre: string, apellido: string, correo: string) => {
         setClientes((prevClientes) =>
             prevClientes.map((cliente) =>
-                cliente.id === id ? { id, nombre, correo } : cliente
+                cliente.id === id ? { id, nombre, apellido, correo } : cliente
             )
         );
         setEditCliente(null);
@@ -67,7 +68,7 @@ const Clientes: React.FC<ClientesProps> = ({ clientes, setClientes }) => {
                     {clientes.map((cliente) => (
                         <tr key={cliente.id}>
                             <td>{cliente.id}</td>
-                            <td>{cliente.nombre}</td>
+                            <td>{`${cliente.nombre} ${cliente.apellido}`}</td>
                             <td>{cliente.correo}</td>
                             <td>
                                 <button onClick={() => iniciarEdicion(cliente.id)}>Editar</button>
