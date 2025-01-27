@@ -49,11 +49,37 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
             return;
         }
 
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0); // Establece la hora de hoy en 00:00:00 para la comparación
         const inicio = new Date(fechaInicio);
         const fin = new Date(fechaFin);
-        if (inicio >= fin) {
-            alert("La fecha de inicio debe ser anterior a la fecha de fin");
+
+        // Validar que las fechas no sean anteriores al día actual
+        if (inicio < hoy || fin < hoy) {
+            alert("Las fechas no pueden ser anteriores al día actual.");
             return;
+        }
+
+        // Validar que la fecha de inicio sea anterior a la fecha de fin
+        if (inicio >= fin) {
+            alert("La fecha de inicio debe ser anterior a la fecha de fin.");
+            return;
+        }
+
+        // Validar solapamiento de fechas para las habitaciones seleccionadas
+        for (const habitacionId of habitacionesSeleccionadas) {
+            const conflictos = reservas.filter(
+                (reserva) =>
+                    reserva.habitaciones.includes(habitacionId) &&
+                    ((inicio >= new Date(reserva.fechaInicio) && inicio < new Date(reserva.fechaFin)) ||
+                        (fin > new Date(reserva.fechaInicio) && fin <= new Date(reserva.fechaFin)) ||
+                        (inicio <= new Date(reserva.fechaInicio) && fin >= new Date(reserva.fechaFin)))
+            );
+
+            if (conflictos.length > 0) {
+                alert(`La habitación con ID ${habitacionId} ya está reservada en las fechas seleccionadas.`);
+                return;
+            }
         }
 
         if (editId) {
@@ -148,11 +174,13 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                     type="date"
                     value={fechaInicio}
                     onChange={(e) => setFechaInicio(e.target.value)}
+                    min={new Date().toISOString().split("T")[0]} // Establece la fecha mínima como hoy
                 />
                 <input
                     type="date"
                     value={fechaFin}
                     onChange={(e) => setFechaFin(e.target.value)}
+                    min={new Date().toISOString().split("T")[0]} // Establece la fecha mínima como hoy
                 />
                 <button onClick={agregarReserva}>
                     {editId ? "Actualizar Reserva" : "Agregar Reserva"}
