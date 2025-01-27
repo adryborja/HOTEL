@@ -1,0 +1,54 @@
+/* General styles for the navbar */
+nav {
+    background-color: #333;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Add margin to page content to avoid overlap with the navbar */
+body {
+    margin: 0;
+    padding-top: 70px;
+}
+
+/* Link styles */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Hover effect for links */
+nav a:hover {
+    color: #333;
+    background-color: #fff;
+}
+
+/* Active link styles */
+nav a.active {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Responsive navbar */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 0.5rem 0;
+    }
+}
