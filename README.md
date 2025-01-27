@@ -40,9 +40,9 @@ con el error.
 
 1. Clona el repositorio:
 
-  Primero git init
+   Primero git init
 
-  git clone https://github.com/adryborja/HOTEL.git 
+   git clone https://github.com/adryborja/HOTEL.git 
 
 2. Navega al directorio del proyecto:
 
@@ -58,10 +58,4 @@ con el error.
   Por ejemplo: Local:   http://localhost:5175/
 
 
-
-## Uso
-
-1. Inicia el servidor:
-  npm run dev
-2. Abre tu navegador y ve a `http://localhost:3000`
 
