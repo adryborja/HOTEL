@@ -24,13 +24,15 @@ Este proyecto es una aplicación web para la gestión de un hotel. Permite a los
 - **Agregar habitaciones:** Permite añadir nuevas habitaciones especificando sus características.
 - **Actualizar habitaciones:** Modifica la información de una habitación existente.
 - **Eliminar habitaciones:** Elimina una habitación del sistema.
-- **Consultar disponibilidad:** Verifica la disponibilidad de las habitaciones en un rango de fechas.
 
 **Reservas**
 - **Crear reservas:** Permite a los usuarios reservar habitaciones especificando fechas y preferencias.
 - **Actualizar reservas:** Modifica los detalles de una reserva existente.
 - **Cancelar reservas:** Permite cancelar una reserva previamente realizada.
 - **Consultar reservas:** Muestra un listado de todas las reservas realizadas por un usuario.
+- **Validación:** Verifica que la fecha de inicio de la reserva sea correcta, es decir mayor o igual a la fecha actual.
+Tambien, valida si la habitacion seleccionada esta disponible en el rango de fechas establecido, caso contrario muestra un alert 
+con el error.
 
 ## Instalación
 
