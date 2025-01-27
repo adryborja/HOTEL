@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ClientesForm from "./ClientesForm";
 
 interface Cliente {
     id: number;
@@ -12,38 +13,22 @@ interface ClientesProps {
 }
 
 const Clientes: React.FC<ClientesProps> = ({ clientes, setClientes }) => {
-    const [nombre, setNombre] = useState<string>("");
-    const [correo, setCorreo] = useState<string>("");
-    const [editId, setEditId] = useState<number | null>(null);
+    const [editCliente, setEditCliente] = useState<Cliente | null>(null);
 
-    const agregarCliente = () => {
-        if (!nombre.trim()) {
-            alert("El nombre no puede estar vacío");
-            return;
-        }
+    const agregarCliente = (nombre: string, correo: string) => {
+        setClientes((prevClientes) => [
+            ...prevClientes,
+            { id: prevClientes.length + 1, nombre, correo },
+        ]);
+    };
 
-        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!correoRegex.test(correo)) {
-            alert("El correo no tiene un formato válido");
-            return;
-        }
-
-        if (editId) {
-            setClientes((prevClientes) =>
-                prevClientes.map((c) =>
-                    c.id === editId ? { id: c.id, nombre, correo } : c
-                )
-            );
-            setEditId(null);
-        } else {
-            setClientes((prevClientes) => [
-                ...prevClientes,
-                { id: prevClientes.length + 1, nombre, correo },
-            ]);
-        }
-
-        setNombre("");
-        setCorreo("");
+    const actualizarCliente = (id: number, nombre: string, correo: string) => {
+        setClientes((prevClientes) =>
+            prevClientes.map((cliente) =>
+                cliente.id === id ? { id, nombre, correo } : cliente
+            )
+        );
+        setEditCliente(null);
     };
 
     const eliminarCliente = (id: number) => {
@@ -52,33 +37,22 @@ const Clientes: React.FC<ClientesProps> = ({ clientes, setClientes }) => {
 
     const iniciarEdicion = (id: number) => {
         const cliente = clientes.find((c) => c.id === id);
-        if (cliente) {
-            setNombre(cliente.nombre);
-            setCorreo(cliente.correo);
-            setEditId(cliente.id);
-        }
+        if (cliente) setEditCliente(cliente);
+    };
+
+    const cancelarEdicion = () => {
+        setEditCliente(null);
     };
 
     return (
         <div>
             <h1>Gestión de Clientes</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Nombre completo"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                />
-                <input
-                    type="email"
-                    placeholder="Correo electrónico"
-                    value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
-                />
-                <button onClick={agregarCliente}>
-                    {editId ? "Actualizar Cliente" : "Agregar Cliente"}
-                </button>
-            </div>
+            <ClientesForm
+                agregarCliente={agregarCliente}
+                actualizarCliente={actualizarCliente}
+                editCliente={editCliente}
+                cancelarEdicion={cancelarEdicion}
+            />
             <h2>Listado de Clientes</h2>
             <table border={1}>
                 <thead>

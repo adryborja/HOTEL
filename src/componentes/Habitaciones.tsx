@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import HabitacionesForm from "./HabitacionesForm";
 
 interface Habitacion {
     id: number;
@@ -12,73 +13,44 @@ interface HabitacionesProps {
 }
 
 const Habitaciones: React.FC<HabitacionesProps> = ({ habitaciones, setHabitaciones }) => {
-    const [tipo, setTipo] = useState<string>("");
-    const [precio, setPrecio] = useState<string>("");
-    const [editId, setEditId] = useState<number | null>(null);
+    const [editHabitacion, setEditHabitacion] = useState<Habitacion | null>(null);
 
-    const agregarHabitacion = () => {
-        if (!tipo.trim()) {
-            alert("El tipo de habitación no puede estar vacío");
-            return;
-        }
+    const agregarHabitacion = (tipo: string, precio: number) => {
+        setHabitaciones((prev) => [
+            ...prev,
+            { id: prev.length + 1, tipo, precio },
+        ]);
+    };
 
-        const precioNumber = parseFloat(precio);
-        if (isNaN(precioNumber) || precioNumber <= 0) {
-            alert("El precio debe ser un número positivo");
-            return;
-        }
-
-        if (editId) {
-            setHabitaciones((prevHabitaciones) =>
-                prevHabitaciones.map((h) =>
-                    h.id === editId ? { id: h.id, tipo, precio: precioNumber } : h
-                )
-            );
-            setEditId(null);
-        } else {
-            setHabitaciones((prevHabitaciones) => [
-                ...prevHabitaciones,
-                { id: prevHabitaciones.length + 1, tipo, precio: precioNumber },
-            ]);
-        }
-
-        setTipo("");
-        setPrecio("");
+    const actualizarHabitacion = (id: number, tipo: string, precio: number) => {
+        setHabitaciones((prev) =>
+            prev.map((h) => (h.id === id ? { id, tipo, precio } : h))
+        );
+        setEditHabitacion(null);
     };
 
     const eliminarHabitacion = (id: number) => {
-        setHabitaciones((prevHabitaciones) => prevHabitaciones.filter((h) => h.id !== id));
+        setHabitaciones((prev) => prev.filter((h) => h.id !== id));
     };
 
     const iniciarEdicion = (id: number) => {
         const habitacion = habitaciones.find((h) => h.id === id);
-        if (habitacion) {
-            setTipo(habitacion.tipo);
-            setPrecio(habitacion.precio.toString());
-            setEditId(habitacion.id);
-        }
+        if (habitacion) setEditHabitacion(habitacion);
+    };
+
+    const cancelarEdicion = () => {
+        setEditHabitacion(null);
     };
 
     return (
         <div>
             <h1>Gestión de Habitaciones</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Tipo de habitación (individual, doble, suite, etc.)"
-                    value={tipo}
-                    onChange={(e) => setTipo(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Precio por noche"
-                    value={precio}
-                    onChange={(e) => setPrecio(e.target.value)}
-                />
-                <button onClick={agregarHabitacion}>
-                    {editId ? "Actualizar Habitación" : "Agregar Habitación"}
-                </button>
-            </div>
+            <HabitacionesForm
+                agregarHabitacion={agregarHabitacion}
+                actualizarHabitacion={actualizarHabitacion}
+                editHabitacion={editHabitacion}
+                cancelarEdicion={cancelarEdicion}
+            />
             <h2>Listado de Habitaciones</h2>
             <table border={1}>
                 <thead>
@@ -96,8 +68,12 @@ const Habitaciones: React.FC<HabitacionesProps> = ({ habitaciones, setHabitacion
                             <td>{habitacion.tipo}</td>
                             <td>${habitacion.precio.toFixed(2)}</td>
                             <td>
-                                <button onClick={() => iniciarEdicion(habitacion.id)}>Editar</button>
-                                <button onClick={() => eliminarHabitacion(habitacion.id)}>Eliminar</button>
+                                <button onClick={() => iniciarEdicion(habitacion.id)}>
+                                    Editar
+                                </button>
+                                <button onClick={() => eliminarHabitacion(habitacion.id)}>
+                                    Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}
