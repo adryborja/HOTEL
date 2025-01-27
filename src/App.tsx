@@ -1,3 +1,4 @@
+// App.tsx
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./componentes/NavBar";
@@ -27,27 +28,20 @@ interface Reserva {
 }
 
 const App: React.FC = () => {
-    const [clientes, setClientes] = useState<Cliente[]>([]);
-    const [habitaciones, setHabitaciones] = useState<Habitacion[]>([]);
-    const [reservas, setReservas] = useState<Reserva[]>([]);
-
-    // Cargar datos desde localStorage al iniciar
-    useEffect(() => {
+    const [clientes, setClientes] = useState<Cliente[]>(() => {
         const storedClientes = localStorage.getItem("clientes");
-        if (storedClientes) {
-            setClientes(JSON.parse(storedClientes));
-        }
+        return storedClientes ? JSON.parse(storedClientes) : [];
+    });
 
+    const [habitaciones, setHabitaciones] = useState<Habitacion[]>(() => {
         const storedHabitaciones = localStorage.getItem("habitaciones");
-        if (storedHabitaciones) {
-            setHabitaciones(JSON.parse(storedHabitaciones));
-        }
+        return storedHabitaciones ? JSON.parse(storedHabitaciones) : [];
+    });
 
+    const [reservas, setReservas] = useState<Reserva[]>(() => {
         const storedReservas = localStorage.getItem("reservas");
-        if (storedReservas) {
-            setReservas(JSON.parse(storedReservas));
-        }
-    }, []);
+        return storedReservas ? JSON.parse(storedReservas) : [];
+    });
 
     // Guardar datos en localStorage cuando cambien los clientes
     useEffect(() => {
