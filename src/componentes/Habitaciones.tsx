@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HabitacionesForm from "./HabitacionesForm";
+import RoomCarousel from "./RoomCarousel";
 
 interface Habitacion {
     id: number;
@@ -43,16 +44,22 @@ const Habitaciones: React.FC<HabitacionesProps> = ({ habitaciones, setHabitacion
     };
 
     return (
-        <div>
-            <h1>Gestión de Habitaciones</h1>
+        <div className="habitaciones-container">
+           
+            <h1 className="text-xl font-bold mt-6">Gestión de Habitaciones</h1>
+            <section className="hero-section">
+            <RoomCarousel />
+            </section>
             <HabitacionesForm
                 agregarHabitacion={agregarHabitacion}
                 actualizarHabitacion={actualizarHabitacion}
                 editHabitacion={editHabitacion}
                 cancelarEdicion={cancelarEdicion}
+                
             />
-            <h2>Listado de Habitaciones</h2>
-            <table border={1}>
+          
+            <h2 className="text-lg font-semibold mt-4">Listado de Habitaciones</h2>
+            <table border={1} className="w-full mt-2">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -68,10 +75,16 @@ const Habitaciones: React.FC<HabitacionesProps> = ({ habitaciones, setHabitacion
                             <td>{habitacion.tipo}</td>
                             <td>${habitacion.precio.toFixed(2)}</td>
                             <td>
-                                <button onClick={() => iniciarEdicion(habitacion.id)}>
+                                <button
+                                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                                    onClick={() => iniciarEdicion(habitacion.id)}
+                                >
                                     Editar
                                 </button>
-                                <button onClick={() => eliminarHabitacion(habitacion.id)}>
+                                <button
+                                    className="bg-red-500 text-white px-2 py-1 rounded"
+                                    onClick={() => eliminarHabitacion(habitacion.id)}
+                                >
                                     Eliminar
                                 </button>
                             </td>
