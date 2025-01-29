@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./componentes/NavBar";
@@ -10,6 +9,7 @@ import Reservas from "./componentes/Reservas";
 interface Cliente {
     id: number;
     nombre: string;
+    apellido: string;
     correo: string;
 }
 
@@ -43,17 +43,14 @@ const App: React.FC = () => {
         return storedReservas ? JSON.parse(storedReservas) : [];
     });
 
-    // Guardar datos en localStorage cuando cambien los clientes
     useEffect(() => {
         localStorage.setItem("clientes", JSON.stringify(clientes));
     }, [clientes]);
 
-    // Guardar datos en localStorage cuando cambien las habitaciones
     useEffect(() => {
         localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
     }, [habitaciones]);
 
-    // Guardar datos en localStorage cuando cambien las reservas
     useEffect(() => {
         localStorage.setItem("reservas", JSON.stringify(reservas));
     }, [reservas]);
@@ -61,38 +58,30 @@ const App: React.FC = () => {
     return (
         <Router>
             <NavBar />
-            <Routes>
-                <Route path="/" element={<Inicio />} />
-                <Route
-                    path="/clientes"
-                    element={
-                        <Clientes
-                            clientes={clientes}
-                            setClientes={setClientes}
-                        />
-                    }
-                />
-                <Route
-                    path="/habitaciones"
-                    element={
-                        <Habitaciones
-                            habitaciones={habitaciones}
-                            setHabitaciones={setHabitaciones}
-                        />
-                    }
-                />
-                <Route
-                    path="/reservas"
-                    element={
-                        <Reservas
-                            reservas={reservas}
-                            setReservas={setReservas}
-                            clientes={clientes}
-                            habitaciones={habitaciones}
-                        />
-                    }
-                />
-            </Routes>
+            <div className="container">
+                <Routes>
+                    <Route path="/" element={<Inicio />} />
+                    <Route 
+                        path="/clientes" 
+                        element={<Clientes clientes={clientes} setClientes={setClientes} />} 
+                    />
+                    <Route 
+                        path="/habitaciones" 
+                        element={<Habitaciones habitaciones={habitaciones} setHabitaciones={setHabitaciones} />} 
+                    />
+                    <Route 
+                        path="/reservas" 
+                        element={
+                            <Reservas 
+                                reservas={reservas} 
+                                setReservas={setReservas}
+                                clientes={clientes}
+                                habitaciones={habitaciones}
+                            />
+                        } 
+                    />
+                </Routes>
+            </div>
         </Router>
     );
 };
