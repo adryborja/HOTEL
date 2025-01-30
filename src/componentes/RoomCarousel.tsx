@@ -13,11 +13,11 @@ const RoomCarousel: React.FC = () => {
             alt: "Habitación Doble",
         },
         {
-            src: "https://i.pinimg.com/736x/95/e4/da/95e4dafc454791704b2ee4adf42460b6.jpg",
+            src: "imagenes/Habitación Triple.jpeg",
             alt: "Habitación Triple",
         },
         {
-            src: "https://i.pinimg.com/736x/95/e4/da/95e4dafc454791704b2ee4adf42460b6.jpg",
+            src: "imagenes/Suite.jpeg",
             alt: "Habitación Siute",
         },
         
