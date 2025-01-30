@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import ReservasForm from "./ReservasForm";
 
+//Estructura de cliente con TypeScript
 interface Cliente {
     id: number;
     nombre: string;
     apellido: string;
 }
 
+//Estructura de habitación con TypeScript
 interface Habitacion {
     id: number;
     tipo: string;
     precio: number;
 }
 
+//Estructura de reserva con TypeScript
 interface Reserva {
     id: number;
     clienteId: number;
@@ -21,21 +24,23 @@ interface Reserva {
     fechaFin: string;
 }
 
+//Propiedades que recibe el componente Reservas
 interface ReservasProps {
     reservas: Reserva[];
     setReservas: React.Dispatch<React.SetStateAction<Reserva[]>>;
     clientes: Cliente[];
     habitaciones: Habitacion[];
 }
-
+//Componente Funcional Reservas con sus props
 const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, habitaciones }) => {
+    //Estado para almacenar la reserva a editar
     const [editReserva, setEditReserva] = useState<Reserva | null>(null);
-
+    //Función para agregar una reserva a la lista
     const agregarReserva = (clienteId: number, habitacionesSeleccionadas: number[], fechaInicio: string, fechaFin: string) => {
         setReservas((prev) => [
             ...prev,
             {
-                id: prev.length + 1,
+                id: prev.length + 1, //Se asigna un ID único
                 clienteId,
                 habitaciones: habitacionesSeleccionadas,
                 fechaInicio,
@@ -43,7 +48,7 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
             },
         ]);
     };
-
+    //Función para actualizar una reserva existente en la lista
     const actualizarReserva = (id: number, clienteId: number, habitacionesSeleccionadas: number[], fechaInicio: string, fechaFin: string) => {
         setReservas((prev) =>
             prev.map((reserva) =>
@@ -52,18 +57,20 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                     : reserva
             )
         );
-        setEditReserva(null);
+        setEditReserva(null); //Terminar la edición
     };
 
+    //Función para eliminar una reserva de la lista
     const eliminarReserva = (id: number) => {
         setReservas((prev) => prev.filter((reserva) => reserva.id !== id));
     };
 
+    //Función para iniciar la edición de una reserva
     const iniciarEdicion = (id: number) => {
         const reserva = reservas.find((r) => r.id === id);
         if (reserva) setEditReserva(reserva);
     };
-
+    //Función para cancelar la edición de una reserva
     const cancelarEdicion = () => {
         setEditReserva(null);
     };
@@ -71,6 +78,7 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
     return (
         <div>
             <h1>Gestión de Reservas</h1>
+            {/* Formulario de reservas */}
             <ReservasForm
                 agregarReserva={agregarReserva}
                 actualizarReserva={actualizarReserva}
@@ -80,6 +88,7 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                 habitaciones={habitaciones}
                 reservas={reservas}
             />
+            {/* Tabla con el listado de reservas */}
             <h2>Listado de Reservas</h2>
             <table border={1}>
                 <thead>
@@ -96,12 +105,14 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                         <tr key={reserva.id}>
                             <td>{reserva.id}</td>
                             <td>
+                            {/* Mostrar el nombre y apellido del cliente, busca el cliente por su ID*/}
                             {`${clientes.find((c) => c.id === reserva.clienteId)?.nombre || ""} ${
                             clientes.find((c) => c.id === reserva.clienteId)?.apellido || ""
                             }`.trim()}
                             
                             </td>
                             <td>
+                                {/* Mostrar los tipos de habitaciones reservadas, busca las habitaciones por su ID*/}
                                 {reserva.habitaciones
                                     .map((id) => habitaciones.find((h) => h.id === id)?.tipo || "")
                                     .join(", ")}
@@ -110,6 +121,7 @@ const Reservas: React.FC<ReservasProps> = ({ reservas, setReservas, clientes, ha
                                 {reserva.fechaInicio} - {reserva.fechaFin}
                             </td>
                             <td>
+                                {/* Botones para editar y eliminar reservas */}
                                 <button onClick={() => iniciarEdicion(reserva.id)}>Editar</button>
                                 <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
                             </td>

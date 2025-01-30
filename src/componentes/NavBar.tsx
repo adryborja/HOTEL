@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
+//Componente Funcional NavBar
 const NavBar: React.FC = () => {
     return (
         <nav>
@@ -13,4 +14,5 @@ const NavBar: React.FC = () => {
     );
 };
 
+//Exportar el componente NavBar
 export default NavBar;
