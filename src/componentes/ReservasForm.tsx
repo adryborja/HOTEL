@@ -90,6 +90,7 @@ const ReservasForm: React.FC<ReservasFormProps> = ({
         for (const habitacionId of habitacionesSeleccionadas) {
             const conflictos = reservas.filter(
                 (reserva) =>
+                    reserva.id !== editReserva?.id &&
                     reserva.habitaciones.includes(habitacionId) &&
                     ((inicio >= new Date(reserva.fechaInicio) && inicio < new Date(reserva.fechaFin)) ||
                         (fin > new Date(reserva.fechaInicio) && fin <= new Date(reserva.fechaFin)) ||
