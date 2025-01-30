@@ -28,7 +28,7 @@ const RoomCarousel: React.FC = () => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
-        }, 5000);
+        }, 2000);
 
         return () => clearInterval(interval);
     }, [images.length]);
