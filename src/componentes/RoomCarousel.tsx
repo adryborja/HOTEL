@@ -9,7 +9,7 @@ const RoomCarousel: React.FC = () => {
             alt: "Habitación Simple",
         },
         {
-            src: "https://i.pinimg.com/736x/97/27/32/9727321f52cb31518107d5f84c117583.jpg",
+            src: "imagenes/Habitación Doble.jpeg",
             alt: "Habitación Doble",
         },
         {
@@ -45,8 +45,7 @@ const RoomCarousel: React.FC = () => {
                     alt={images[currentIndex].alt}
                     className="w-full h-full object-cover"
                 />
-                
-                     
+       
                 
             </div>
         </div>
