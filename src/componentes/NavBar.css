@@ -65,12 +65,7 @@ nav {
     justify-content: center;
     gap: 2rem;
 }
-p{
-    font-size: 1rem;
-    text-align: center;
-    margin-top: 2rem;
-    color:#faf6f3;
-}
+
 nav a {
     color: #f5ecec;
     text-decoration: none;

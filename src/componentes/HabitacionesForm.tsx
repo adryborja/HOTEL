@@ -53,7 +53,7 @@ const HabitacionesForm: React.FC<HabitacionFormProps> = ({
            
             <select name="" id="" value={tipo} onChange={(e) => setTipo(e.target.value)}>
                  <option value={0}>-- Tipo de habitación --</option>
-                <option value="Individual">Individual</option>
+                <option value="Simple">Simple</option>
                 <option value="Doble">Doble</option>
                 <option value="Triple">Triple</option>
                 <option value="Suite">Suite</option>
