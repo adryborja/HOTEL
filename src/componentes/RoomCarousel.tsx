@@ -5,8 +5,8 @@ const RoomCarousel: React.FC = () => {
 
    const images = [
        {
-            src: "https://i.pinimg.com/736x/5f/0a/2b/5f0a2b1614ffd855c333591799321b4e.jpg",
-            alt: "Habitación Individual",
+            src: "imagenes/Habitación Simple.jpeg",
+            alt: "Habitación Simple",
         },
         {
             src: "https://i.pinimg.com/736x/97/27/32/9727321f52cb31518107d5f84c117583.jpg",
