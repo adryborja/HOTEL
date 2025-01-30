@@ -33,9 +33,6 @@ const RoomCarousel: React.FC = () => {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    const goToSlide = (index: number) => {
-        setCurrentIndex(index);
-    };
 
     return (
         <div className="relative w-full max-w-[800px] mx-auto">
