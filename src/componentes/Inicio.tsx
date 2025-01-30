@@ -2,7 +2,7 @@ const Inicio: React.FC = () => {
     
     return (
         <div>
-            <h1>Bienvenidos al Powerpuff Girls Hotel</h1>
+            <h1>Bienvenido a Nova - La Solución Inteligente para la Gestión Hotelera</h1>
             
         </div>
     );
