@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 
-/*Establecemos los estilos generales para todos los elementos */
+/* Establecemos los estilos generales para todos los elementos */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Estilos para el cuerpo de la página */
 body {
     font-family: 'Montserrat', sans-serif;
     color: #2c3e50;
@@ -14,7 +15,6 @@ body {
     padding-top: 80px;
     position: relative;
 }
-
 
 body::before {
     content: '';
@@ -31,10 +31,18 @@ body::before {
     z-index: -1;
 }
 
+/* Estilos para los títulos */
 h1,
 h2 {
     font-family: 'Playfair Display', serif;
     color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+title habitacion {
+    font-family: 'Playfair Display', serif;
+    color: #ffe5bd;
+
     margin-bottom: 1.5rem;
 }
 
@@ -45,7 +53,7 @@ h1 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-
+/* Estilos para Navigation Bar */
 nav {
     background-color: #423c3c;
     padding: 1rem;
@@ -60,6 +68,7 @@ nav {
     gap: 2rem;
 }
 
+/* Estilos para los enlaces de la Navigation Bar */
 nav a {
     color: #f5ecec;
     text-decoration: none;
@@ -70,17 +79,18 @@ nav a {
     transition: all 0.3s ease;
 }
 
+/* Estilos para los enlaces de la Navigation Bar al pasar el cursor */
 nav a:hover {
     background-color: #d7bba8;
     color: #2c3e50;
 }
-
+/* Estilos para el contenedor principal */
 div {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
-
+/* Estilos para los campos de los formularios */
 input,
 select {
     padding: 12px;
@@ -91,14 +101,14 @@ select {
     background-color: #fff;
     transition: border-color 0.3s ease;
 }
-
+/* Estilos para los campos de los formularios al pasar el cursor */
 input:focus,
 select:focus {
     outline: none;
     border-color: #a1887f;
     box-shadow: 0 0 5px rgba(161, 136, 127, 0.3);
 }
-
+/* Estilos para los botones */
 button {
     background-color: #a1887f;
     color: white;
@@ -111,12 +121,12 @@ button {
     transition: all 0.3s ease;
     margin: 10px 5px;
 }
-
+/* Estilos para los botones al pasar el cursor */
 button:hover {
     background-color: #8d6e63;
     transform: translateY(-2px);
 }
-
+/* Estilos para las tablas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -126,7 +136,7 @@ table {
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
-
+/* Estilos para las cabeceras de las tablas */
 th {
     background-color: #d7bba8;
     color: #5d4037;
@@ -134,16 +144,16 @@ th {
     text-align: left;
     font-family: 'Playfair Display', serif;
 }
-
+/* Estilos para las filas de las tablas */
 td {
     padding: 12px 15px;
     border-bottom: 1px solid #f0e6e0;
 }
-
+/* Estilos para las filas de las tablas al pasar el cursor */
 tr:hover {
     background-color: #faf6f3;
 }
-
+/* Estilos para los contenedores de los formularios */
 .form-container {
     background-color: white;
     padding: 2rem;
@@ -151,26 +161,26 @@ tr:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
 }
-
+/* Estilos para los fieldsets */
 fieldset {
     border: 1px solid #d7bba8;
     border-radius: 8px;
     padding: 1rem;
     margin: 1rem 0;
 }
-
+/* Estilos para las leyendas de los fieldsets */
 legend {
     font-family: 'Playfair Display', serif;
     color: #d1aaa0;
     padding: 0 10px;
 }
-
+/* Estilos para las etiquetas de los formularios */
 label {
     display: block;
     margin: 8px 0;
     color: #ffffff;
 }
-
+/* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
